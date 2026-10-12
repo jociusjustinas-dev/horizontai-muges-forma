@@ -1,36 +1,44 @@
 # Horizontai: būsto mugės registracijos forma
 
-**WordPress versija (horizontai.com svetainei): žr. [`wordpress/README.md`](wordpress/README.md).**
-Žemiau aprašyta atskiro HTML puslapio versija (`index.html`).
+Atskiras puslapis, nepriklausomas nuo horizontai.com svetainės. Viskas, ko reikia, yra šiame aplanke:
 
-Failai:
-- `index.html`: pati forma (Horizontų dizainas, pritaikyta planšetei ir telefonui)
-- `apps-script.gs`: Google Sheets priėmimo skriptas
+```
+index.html       forma
+fonts/           Mars ir Mier A šriftai
+img/hero.webp    nuotrauka kairėje
+apps-script.gs   Google Sheets kodas (į serverį kelti nereikia)
+```
 
-## 1. Google Sheet paruošimas (~5 min.)
+## Paleidimas live (3 žingsniai, ~10 min.)
 
-1. Sukurkite naują Google Sheet, pvz. „Horizontai mugė 2026".
-2. **Extensions → Apps Script**. Ištrinkite esamą kodą ir įklijuokite `apps-script.gs` turinį. Išsaugokite.
-3. **Deploy → New deployment → Web app**:
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-4. Patvirtinkite leidimus ir nukopijuokite **Web app URL** (`https://script.google.com/macros/s/.../exec`).
-5. `index.html` faile įrašykite jį į `const ENDPOINT = "";`.
+### 1. Google Sheet
+1. Sukurti naują Google Sheet, pvz. „Horizontai mugė 2026".
+2. **Extensions → Apps Script**, ištrinti esamą kodą, įklijuoti `apps-script.gs`, išsaugoti.
+3. **Deploy → New deployment → Web app**: Execute as **Me**, Who has access **Anyone** → Deploy.
+4. Patvirtinti leidimus ir nukopijuoti **Web app URL** (`https://script.google.com/macros/s/.../exec`).
 
-Lentelė „Registracijos" su antraštėmis susikurs automatiškai po pirmo įrašo.
-Excel failas: **File → Download → Microsoft Excel (.xlsx)**.
+### 2. Įrašyti URL į formą
+`index.html` faile surasti eilutę ir įklijuoti URL:
+```js
+const ENDPOINT = "https://script.google.com/macros/s/.../exec";
+```
+Ten pat galima pakeisti `SOURCE` (tekstas stulpelyje „Šaltinis").
 
-## 2. Talpinimas
+### 3. Įkelti į serverį
+Įkelti `index.html`, `fonts/` ir `img/` į bet kurį serverį per FTP ar failų tvarkyklę,
+pvz. į `horizontai.visualidentity.studio/`. Daugiau nieko nereikia: nėra PHP, duomenų bazės ar build'o.
 
-Įkelkite `index.html` kartu su `fonts/` aplanku į serverį (pvz. `horizontai.visualidentity.studio/muge.html`, kaip Sangūškų parko atveju).
-Šriftai Mars ir Mier A yra `fonts/` aplanke (paimti iš horizontai.com temos).
+Atsidarius puslapiui, dešiniame apatiniame kampe turi degti **žalias** taškas „Prisijungta".
+Išsiųsti 1 bandomąjį įrašą ir patikrinti, ar jis atsirado lentelėje „Registracijos".
 
-## 3. Mugės dieną
+## Excel
+Google Sheet → **File → Download → Microsoft Excel (.xlsx)**.
+Stulpeliai: Laikas · Vardas Pavardė · El. paštas · Telefonas · Komentaras · Sutikimas · Šaltinis · ID.
 
-- Atidarykite formą planšetėje, įjunkite pilno ekrano režimą (iPad: „Add to Home Screen").
+## Mugės dieną
+- Planšetėje atidaryti puslapį ir pridėti prie pradžios ekrano (iPad: Share → **Add to Home Screen**),
+  tada forma atsidaro per visą ekraną be naršyklės juostos.
 - Po pateikimo rodomas „Ačiū" ekranas, po 8 s forma išsivalo kitam lankytojui.
-- **Dingus internetui** įrašai nesiprarda: jie laukia eilėje ir išsiunčiami atsiradus ryšiui.
-  Apatiniame dešiniame kampe matyti būsena (žalia: viskas išsiųsta, geltona: laukia, raudona: nėra ryšio).
-- **Atsarginė kopija**: 3 kartus greitai bakstelėkite Horizontų logotipą, atsisiųs visų tos planšetės įrašų CSV.
-
-Prieš mugę: pateikite 1 bandomąjį įrašą ir patikrinkite, ar atsirado lentelėje.
+- **Dingus internetui** įrašai neprarandami: jie laukia planšetėje ir išsiunčiami, kai grįžta ryšys.
+  Būsena kampe: žalia (viskas išsiųsta), geltona (laukia), raudona (nėra ryšio arba nenustatytas URL).
+- **Atsarginė kopija**: 3 kartus greitai bakstelėti Horizontai logotipą, atsisiųs visų tos planšetės įrašų CSV.
