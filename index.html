@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Horizontai | Registracija</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ NUSTATYMAI ============ */
+  /* Šriftai kraunami iš horizontai.com. Jei forma talpinama kitame domene,
+     įkelkite šriftų failus šalia (fonts/) ir pakeiskite url() kelius žemiau. */
+  @font-face { font-family: "Mars"; src: url("https://horizontai.com/wp-content/themes/wam/assets/fonts/MarsExtendedWeb-Regular.woff2") format("woff2"); font-display: swap; }
+  @font-face { font-family: "Mier A"; src: url("https://horizontai.com/wp-content/themes/wam/assets/fonts/MierA-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Mier A"; src: url("https://horizontai.com/wp-content/themes/wam/assets/fonts/MierA-Book.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --mist: #f4f4f4;
+    --line: #111111;
+    --muted: #6b6b6b;
+    --lime: #d3f700;
+    --blue: #0056a7;
+    --error: #c4321c;
+    --display: "Mars", "Unbounded", "Arial Black", sans-serif;
+    --text: "Mier A", "Figtree", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--ink);
+    color: var(--ink);
+    font-family: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .page {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  }
+
+  /* ---------- Kairė: tamsus prekės ženklo blokas ---------- */
+  .brand {
+    position: relative;
+    color: var(--paper);
+    padding: clamp(28px, 5vw, 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(17,17,17,.15) 0%, rgba(17,17,17,.85) 100%),
+      url("https://horizontai.com/wp-content/uploads/2026/02/apie-projekta-e1770387437765.webp") center / cover no-repeat,
+      var(--ink);
+  }
+  .brand::after { /* plonos rėmo linijos kaip svetainėje */
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-left: 1px solid rgba(255,255,255,.35);
+    border-right: 1px solid rgba(255,255,255,.35);
+    pointer-events: none;
+  }
+  .logo { width: clamp(140px, 16vw, 200px); height: auto; display: block; user-select: none; }
+  .brand h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(30px, 4.2vw, 58px);
+    line-height: 1.05;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    letter-spacing: .01em;
+  }
+  .brand p {
+    font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.5;
+    max-width: 30ch;
+    margin: 0;
+    opacity: .85;
+  }
+  .brand .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .brand .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); }
+
+  /* ---------- Dešinė: forma ---------- */
+  .panel {
+    background: var(--paper);
+    padding: clamp(28px, 5vw, 72px);
+    display: flex;
+    align-items: center;
+  }
+  .panel-inner { width: 100%; max-width: 560px; margin: 0 auto; }
+  .panel h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(24px, 2.4vw, 32px);
+    text-transform: uppercase;
+    margin: 0 0 clamp(24px, 4vh, 44px);
+  }
+
+  .field { position: relative; margin-bottom: clamp(18px, 3vh, 28px); }
+  .field label {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    font: 400 20px/1.3 var(--text);
+    color: var(--ink);
+    padding: 8px 0 10px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color .2s;
+  }
+  .field textarea { resize: none; min-height: 84px; }
+  .field input:focus, .field textarea:focus { border-bottom: 2px solid var(--ink); padding-bottom: 9px; }
+  .field::after { /* žalia akcentinė linija fokuse */
+    content: "";
+    position: absolute; left: 0; bottom: 0;
+    height: 2px; width: 0;
+    background: var(--lime);
+    transition: width .3s ease;
+  }
+  .field:focus-within::after { width: 48px; }
+  .field.invalid input, .field.invalid textarea { border-bottom-color: var(--error); }
+  .field .err { display: none; color: var(--error); font-size: 13px; margin-top: 6px; }
+  .field.invalid .err { display: block; }
+
+  .check {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 14px; line-height: 1.45;
+    margin: 8px 0 12px;
+    cursor: pointer;
+  }
+  .check input {
+    flex: none;
+    width: 22px; height: 22px; margin: 0;
+    border: 1px solid var(--ink); border-radius: 0;
+    -webkit-appearance: none; appearance: none;
+    display: grid; place-content: center;
+    cursor: pointer;
+  }
+  .check input:checked { background: var(--ink); }
+  .check input:checked::after { content: ""; width: 10px; height: 6px; border: solid var(--lime); border-width: 0 0 2px 2px; transform: rotate(-45deg) translate(1px, -1px); }
+  .check a { color: inherit; }
+  .check.invalid { color: var(--error); }
+  .check.invalid input { border-color: var(--error); }
+
+  .actions { display: flex; align-items: center; gap: 18px; margin-top: clamp(20px, 3.5vh, 36px); flex-wrap: wrap; }
+  .btn {
+    font: 500 17px/1 var(--text);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    padding: 18px 38px;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 12px;
+    transition: background .2s, color .2s;
+    min-height: 56px;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
+  .btn:disabled { opacity: .5; cursor: wait; }
+  .btn svg { width: 18px; height: 18px; }
+  .hint { font-size: 13px; color: var(--muted); }
+
+  /* ---------- Padėka ---------- */
+  .thanks { display: none; text-align: left; }
+  .thanks .mark {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--lime);
+    display: grid; place-content: center;
+    margin-bottom: 28px;
+  }
+  .thanks .mark svg { width: 28px; height: 28px; }
+  .thanks p { font-size: 19px; line-height: 1.5; max-width: 36ch; margin: 0 0 32px; }
+  .thanks .bar { height: 2px; background: var(--mist); overflow: hidden; max-width: 260px; }
+  .thanks .bar i { display: block; height: 100%; width: 100%; background: var(--ink); transform-origin: left; }
+  .done .form-wrap { display: none; }
+  .done .thanks { display: block; }
+  .done .thanks .bar i { animation: drain var(--reset, 8s) linear forwards; }
+  @keyframes drain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+  /* ---------- Būsenos indikatorius (tik personalui) ---------- */
+  .status {
+    position: fixed; right: 14px; bottom: 12px;
+    font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.9); padding: 4px 8px; border-radius: 999px;
+  }
+  .status i { width: 7px; height: 7px; border-radius: 50%; background: #3aa655; }
+  .status.pending i { background: #e3a008; }
+  .status.offline i { background: var(--error); }
+
+  /* ---------- Mobilus / vertikalus planšetė ---------- */
+  @media (max-width: 860px) {
+    .page { grid-template-columns: 1fr; }
+    .brand { min-height: 0; padding: 28px 24px 32px; }
+    .brand::after { display: none; }
+    .brand .copy { margin-top: 36px; }
+    .brand h1 { font-size: clamp(26px, 7vw, 40px); }
+    .panel { padding: 32px 24px 64px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="brand">
+    <!-- Logotipas: 3x bakstelėkite jį, kad atsisiųstumėte vietinę atsarginę kopiją (CSV) -->
+    <svg class="logo" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155 16" fill="#fff" role="img" aria-label="Horizontai">
+      <path d="M11.2494 0.138672H10.751L11.2494 1.93954V6.85729H2.99035V1.93954L3.48875 0.138672H2.99035H0.498392H0L0.498392 1.93954V15.7923H0.783188H2.99035V9.07374H11.2494V15.7923H13.6702V1.93954L14.1686 0.138672H13.6702H11.2494Z"/>
+      <path d="M26.4135 0C24.2064 0 22.2128 0.761905 20.6464 2.35498C19.0801 3.87879 18.2969 5.81818 18.2969 7.96537C18.2969 10.1818 19.0801 12.0519 20.6464 13.5758C22.2128 15.0996 24.1352 15.9307 26.4135 15.9307C28.6207 15.9307 30.6143 15.1688 32.1807 13.5758C33.747 12.0519 34.5302 10.1126 34.5302 7.96537C34.5302 5.74892 33.747 3.87879 32.1807 2.28571C30.5431 0.761905 28.6207 0 26.4135 0ZM30.4007 12.0519C29.3327 13.1602 27.9799 13.7143 26.4135 13.7143C24.776 13.7143 23.4944 13.1602 22.4264 12.0519C21.3584 10.9437 20.7888 9.62771 20.7888 8.03463C20.7888 6.44156 21.3584 5.12554 22.4264 4.01732C23.4944 2.90909 24.8472 2.35498 26.4135 2.35498C28.0511 2.35498 29.3327 2.90909 30.4007 4.01732C31.4687 5.12554 32.0383 6.44156 32.0383 8.03463C32.0383 9.55844 31.4687 10.9437 30.4007 12.0519Z"/>
+      <path d="M49.9834 8.24264C50.6954 7.41147 51.0514 6.37251 51.0514 5.19502C51.0514 3.80974 50.553 2.63225 49.6274 1.66255C48.6307 0.692856 47.4203 0.208008 45.8539 0.208008H38.9476H38.4492L38.9476 1.93961V15.7924H39.2324H41.4396V10.1128H45.0707L48.7019 15.7924H51.4786L47.6339 9.83571C48.5595 9.55866 49.3426 9.00454 49.9834 8.24264ZM41.4396 7.96558V2.42446H45.8539C46.7795 2.42446 47.4203 2.70151 47.9187 3.18636C48.4171 3.74047 48.7019 4.36385 48.7019 5.19502C48.7019 6.02619 48.4171 6.71883 47.8475 7.20368C47.2779 7.68853 46.5659 7.96558 45.6403 7.96558H41.4396Z"/>
+      <path d="M55.9632 0.138672H55.4648L55.9632 1.93954V15.7923H56.248H58.4552V1.93954L58.9536 0.138672H58.4552H55.9632Z"/>
+      <path d="M63.5087 2.42439H72.195L63.4375 13.5066V15.7923H63.7223H75.1853V13.5759H66.4279L75.3989 2.35512V0.138672H63.5087V2.42439Z"/>
+      <path d="M86.7925 0C84.5853 0 82.5917 0.761905 81.0253 2.35498C79.459 3.87879 78.6758 5.81818 78.6758 7.96537C78.6758 10.1818 79.459 12.0519 81.0253 13.5758C82.5917 15.0996 84.5141 15.9307 86.7925 15.9307C88.9996 15.9307 90.9932 15.1688 92.5596 13.5758C94.1259 12.0519 94.9091 10.1126 94.9091 7.96537C94.9091 5.74892 94.1259 3.87879 92.5596 2.28571C90.922 0.761905 88.9996 0 86.7925 0ZM90.7796 12.0519C89.7116 13.1602 88.3588 13.7143 86.7925 13.7143C85.1549 13.7143 83.8733 13.1602 82.8053 12.0519C81.7373 10.9437 81.1677 9.62771 81.1677 8.03463C81.1677 6.44156 81.7373 5.12554 82.8053 4.01732C83.8733 2.90909 85.2261 2.35498 86.7925 2.35498C88.43 2.35498 89.7116 2.90909 90.7796 4.01732C91.8476 5.12554 92.4172 6.44156 92.4172 8.03463C92.4172 9.55844 91.8476 10.9437 90.7796 12.0519Z"/>
+      <path d="M110.5 0.138672V13.5759L103.522 0.138672H101.315H99.3929H98.8945L99.3929 1.93954V15.7923H99.6777H101.814V2.21659L108.862 15.7923H112.921V1.93954L113.419 0.138672H112.921H110.5Z"/>
+      <path d="M117.477 2.21659V2.28586V2.70144L119.257 2.28586H122.816V15.7923H123.03H125.237V2.28586H128.584L130.364 2.70144V2.28586V2.21659V0.138672H117.477V2.21659Z"/>
+      <path d="M142.397 0.138672H141.756H138.125H137.484L137.698 1.31616L132.145 15.7923H132.501H134.708L136.132 12.1906H143.679L145.032 15.7923H147.595L142.184 1.31616L142.397 0.138672ZM136.915 9.97417L139.976 1.87027L142.967 9.97417H136.915Z"/>
+      <path d="M154.502 0.138672H152.01H151.512L152.01 1.93954V15.7923H152.295H154.502V1.93954L155 0.138672H154.502Z"/>
+    </svg>
+
+    <div class="copy">
+      <div class="tag">Būsto mugė</div>
+      <h1>Gyvenimas, darbas ir verslas Vilniaus centre</h1>
+      <p>Palikite kontaktus ir mūsų pardavimų komanda susisieks su jumis dėl Horizontų būstų.</p>
+    </div>
+  </section>
+
+  <main class="panel">
+    <div class="panel-inner" id="root">
+      <div class="form-wrap">
+        <h2>Susisiekime</h2>
+        <form id="form" novalidate autocomplete="off">
+          <div class="field">
+            <label for="name">Vardas ir pavardė*</label>
+            <input id="name" name="name" type="text" autocapitalize="words" required>
+            <div class="err">Įrašykite vardą ir pavardę</div>
+          </div>
+          <div class="field">
+            <label for="email">El. paštas*</label>
+            <input id="email" name="email" type="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
+            <div class="err">Patikrinkite el. pašto adresą</div>
+          </div>
+          <div class="field">
+            <label for="phone">Telefono numeris*</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="+370" required>
+            <div class="err">Patikrinkite telefono numerį</div>
+          </div>
+          <div class="field">
+            <label for="comment">Komentaras</label>
+            <textarea id="comment" name="comment" rows="3" placeholder="Pvz. domina 2 kambarių butas"></textarea>
+          </div>
+
+          <label class="check" id="consentWrap">
+            <input type="checkbox" id="consent" name="consent">
+            <span>Sutinku, kad mano duomenys būtų tvarkomi pagal <a href="https://horizontai.com/privatumo-politika/" target="_blank" rel="noopener">privatumo politiką</a> ir su manimi būtų susisiekta.*</span>
+          </label>
+
+          <div class="actions">
+            <button class="btn" type="submit" id="submit">
+              Siųsti
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 9h13M10 4l5 5-5 5"/></svg>
+            </button>
+            <span class="hint">* privalomi laukeliai</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="thanks" aria-live="polite">
+        <div class="mark"><svg viewBox="0 0 28 28" fill="none" stroke="#111" stroke-width="2"><path d="M6 14.5l5 5L22 8.5"/></svg></div>
+        <h2 id="thanksTitle">Ačiū!</h2>
+        <p>Jūsų kontaktus gavome. Netrukus su jumis susisieksime.</p>
+        <div class="bar"><i></i></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="status" id="status"><i></i><span>Prisijungta</span></div>
+
+<script>
+/* ============ KONFIGŪRACIJA ============ */
+// Įklijuokite Google Apps Script "Web app" URL (žr. README.md)
+const ENDPOINT = "";
+const SOURCE = "Būsto mugė 2026-10";   // įrašoma į stulpelį "Šaltinis"
+const RESET_SECONDS = 8;               // po kiek sek. forma grįžta į pradžią
+
+/* ============ LOGIKA ============ */
+const $ = (s) => document.querySelector(s);
+const form = $("#form"), root = $("#root"), statusEl = $("#status");
+const QUEUE_KEY = "hz_queue", BACKUP_KEY = "hz_backup";
+
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)) || []; } catch (e) { return []; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+
+const validators = {
+  name: (v) => v.trim().split(/\s+/).length >= 2 || v.trim().length >= 3,
+  email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+  phone: (v) => v.replace(/[^\d]/g, "").length >= 8
+};
+
+function validate() {
+  let ok = true, first = null;
+  for (const [id, fn] of Object.entries(validators)) {
+    const el = $("#" + id), good = fn(el.value);
+    el.closest(".field").classList.toggle("invalid", !good);
+    if (!good) { ok = false; first = first || el; }
+  }
+  const consent = $("#consent").checked;
+  $("#consentWrap").classList.toggle("invalid", !consent);
+  if (!consent) ok = false;
+  if (first) first.focus();
+  return ok;
+}
+
+form.addEventListener("input", (e) => {
+  const f = e.target.closest(".field");
+  if (f && f.classList.contains("invalid") && validators[e.target.id]?.(e.target.value)) f.classList.remove("invalid");
+  if (e.target.id === "consent" && e.target.checked) $("#consentWrap").classList.remove("invalid");
+});
+
+async function send(entry) {
+  if (!ENDPOINT) throw new Error("ENDPOINT nenurodytas");
+  const body = new URLSearchParams(entry);
+  // no-cors: Apps Script neleidžia skaityti atsakymo, bet tinklo klaida vis tiek išmetama
+  await fetch(ENDPOINT, { method: "POST", mode: "no-cors", body });
+}
+
+let flushing = false;
+async function flush() {
+  if (flushing) return;
+  flushing = true;
+  let queue = store.get(QUEUE_KEY);
+  while (queue.length && navigator.onLine) {
+    try { await send(queue[0]); queue.shift(); store.set(QUEUE_KEY, queue); }
+    catch (e) { break; }
+  }
+  flushing = false;
+  updateStatus();
+}
+
+function updateStatus() {
+  const n = store.get(QUEUE_KEY).length;
+  statusEl.className = "status" + (!navigator.onLine || !ENDPOINT ? " offline" : n ? " pending" : "");
+  statusEl.querySelector("span").textContent =
+    !navigator.onLine ? `Nėra interneto · laukia ${n}` :
+    !ENDPOINT ? `ENDPOINT nenustatytas · laukia ${n}` :
+    n ? `Siunčiama · laukia ${n}` :
+    "Prisijungta";
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+  const entry = {
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+    time: new Date().toISOString(),
+    name: $("#name").value.trim(),
+    email: $("#email").value.trim().toLowerCase(),
+    phone: $("#phone").value.trim(),
+    comment: $("#comment").value.trim(),
+    consent: "Taip",
+    source: SOURCE
+  };
+  // Atsarginė kopija planšetėje + eilė siuntimui
+  store.set(BACKUP_KEY, [...store.get(BACKUP_KEY), entry]);
+  store.set(QUEUE_KEY, [...store.get(QUEUE_KEY), entry]);
+  $("#submit").disabled = true;
+  flush();
+  showThanks(entry.name.split(/\s+/)[0]);
+});
+
+let resetTimer;
+function showThanks(first) {
+  $("#thanksTitle").textContent = first ? `Ačiū, ${first}!` : "Ačiū!";
+  root.style.setProperty("--reset", RESET_SECONDS + "s");
+  root.classList.add("done");
+  document.activeElement?.blur();
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(reset, RESET_SECONDS * 1000);
+}
+function reset() {
+  form.reset();
+  root.classList.remove("done");
+  $("#submit").disabled = false;
+  window.scrollTo(0, 0);
+}
+root.querySelector(".thanks").addEventListener("click", () => { clearTimeout(resetTimer); reset(); });
+
+// Paslėpta: 3 greiti paspaudimai ant logotipo atsisiunčia visų įrašų CSV iš šios planšetės
+let taps = 0, tapTimer;
+$("#logo").addEventListener("click", () => {
+  taps++; clearTimeout(tapTimer);
+  tapTimer = setTimeout(() => (taps = 0), 600);
+  if (taps < 3) return;
+  taps = 0;
+  const rows = store.get(BACKUP_KEY);
+  const cols = ["time", "name", "email", "phone", "comment", "consent", "source", "id"];
+  const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const csv = "﻿" + [["Laikas", "Vardas Pavardė", "El. paštas", "Telefonas", "Komentaras", "Sutikimas", "Šaltinis", "ID"].map(esc).join(";"),
+    ...rows.map((r) => cols.map((c) => esc(r[c])).join(";"))].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  a.download = `horizontai-registracijos-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+});
+
+window.addEventListener("online", flush);
+window.addEventListener("offline", updateStatus);
+setInterval(flush, 20000);
+flush();
+</script>
+</body>
+</html>
