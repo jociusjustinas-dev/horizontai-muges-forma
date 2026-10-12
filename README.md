@@ -1,5 +1,8 @@
 # Horizontai: būsto mugės registracijos forma
 
+**WordPress versija (horizontai.com svetainei): žr. [`wordpress/README.md`](wordpress/README.md).**
+Žemiau aprašyta atskiro HTML puslapio versija (`index.html`).
+
 Failai:
 - `index.html`: pati forma (Horizontų dizainas, pritaikyta planšetei ir telefonui)
 - `apps-script.gs`: Google Sheets priėmimo skriptas
