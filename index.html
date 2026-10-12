@@ -5,16 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Horizontai | Registracija</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ============ NUSTATYMAI ============ */
-  /* Šriftai kraunami iš horizontai.com. Jei forma talpinama kitame domene,
-     įkelkite šriftų failus šalia (fonts/) ir pakeiskite url() kelius žemiau. */
-  @font-face { font-family: "Mars"; src: url("https://horizontai.com/wp-content/themes/wam/assets/fonts/MarsExtendedWeb-Regular.woff2") format("woff2"); font-display: swap; }
-  @font-face { font-family: "Mier A"; src: url("https://horizontai.com/wp-content/themes/wam/assets/fonts/MierA-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-  @font-face { font-family: "Mier A"; src: url("https://horizontai.com/wp-content/themes/wam/assets/fonts/MierA-Book.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+  /* Šriftai (Mars, Mier A) paimti iš horizontai.com temos ir laikomi fonts/ aplanke */
+  @font-face { font-family: "Mars"; src: url("fonts/MarsExtendedWeb-Regular.woff2") format("woff2"); font-display: swap; }
+  @font-face { font-family: "Mier A"; src: url("fonts/MierA-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Mier A"; src: url("fonts/MierA-Book.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 
   :root {
     --ink: #111111;
@@ -25,8 +21,8 @@
     --lime: #d3f700;
     --blue: #0056a7;
     --error: #c4321c;
-    --display: "Mars", "Unbounded", "Arial Black", sans-serif;
-    --text: "Mier A", "Figtree", "Helvetica Neue", Arial, sans-serif;
+    --display: "Mars", "Arial Black", sans-serif;
+    --text: "Mier A", "Helvetica Neue", Arial, sans-serif;
   }
 
   * { box-sizing: border-box; }

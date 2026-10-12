@@ -19,9 +19,8 @@ Excel failas: **File → Download → Microsoft Excel (.xlsx)**.
 
 ## 2. Talpinimas
 
-Įkelkite `index.html` į serverį (pvz. `horizontai.visualidentity.studio/muge.html`, kaip Sangūškų parko atveju).
-Šriftai Mars ir Mier A kraunami iš horizontai.com. Jei jie neužsikrauna kitame domene (CORS),
-įkelkite `.woff2` failus šalia ir pakeiskite `@font-face` kelius; iki tol rodomi panašūs atsarginiai šriftai.
+Įkelkite `index.html` kartu su `fonts/` aplanku į serverį (pvz. `horizontai.visualidentity.studio/muge.html`, kaip Sangūškų parko atveju).
+Šriftai Mars ir Mier A yra `fonts/` aplanke (paimti iš horizontai.com temos).
 
 ## 3. Mugės dieną
 
